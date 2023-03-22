@@ -28,7 +28,7 @@ public class server {
         else res = doc999(lopdonvi);
 
         if (lopnghin != 0)
-            res = docto(lopnghin) + "nghin " + res;
+            res = docto(lopnghin) + " nghin " + res;
         if (loptrieu != 0)
             res = docto(loptrieu) + " trieu " + res;
         return res;
@@ -117,7 +117,7 @@ public class server {
                 return;
             }
 
-            sentence_to_client = process(sentence_from_client) +" (Server accepted!)" + '\n';
+            sentence_to_client = process(sentence_from_client)+ '\n';
             outToClient.writeBytes(sentence_to_client);
             //return;
         }

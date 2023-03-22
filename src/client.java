@@ -9,25 +9,34 @@ public class client {
     {
         String sentence_to_server;
         String sentence_from_server;
+        while (true) {
+            System.out.print("Input from client: ");
+            BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("Input from client: ");
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+            sentence_to_server = inFromUser.readLine();
 
-        sentence_to_server = inFromUser.readLine();
 
-        Socket clientSocket = new Socket("127.0.0.1", 6543);
 
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            Socket clientSocket = new Socket("127.0.0.1", 6543);
 
-        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
-        outToServer.writeBytes(sentence_to_server + '\n');
+            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        sentence_from_server = inFromServer.readLine();
+            outToServer.writeBytes(sentence_to_server + '\n');
 
-        System.out.println("FROM SERVER: " + sentence_from_server);
+            sentence_from_server = inFromServer.readLine();
 
-        clientSocket.close();
+            System.out.println("FROM SERVER: " + sentence_from_server);
+
+            if (sentence_to_server == "break") {
+                clientSocket.close();
+                return;
+
+            }
+        }
+
+
     }
 }
 
