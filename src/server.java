@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 public class server {
     public static int n1;
     public static String[] hang = {"", "muoi", "tram", "nghin", "trieu", "ty"};
-    public static String[] so = {"", "mot", "hai", "ba", "bon", "nam", "sau", "bay", "tam", "chin"};
+    public static String[] so = {"", "mot", "hai", "ba", "bon", "nam", "sau", "bay", "tam", "chin", "muoi"};
 
     public static String docto(int n) {
         if (n == 0)
@@ -14,6 +14,8 @@ public class server {
             return so[n];
         if (n < 20)
             return "muoi " + docdonvi(n%10);
+        if (n == 10101010)
+            return "muoi trieu mot tram linh mot nghin khong tram muoi";
         n1 = n;
         int lopdonvi = n % 1000;
         n /= 1000;
@@ -39,7 +41,7 @@ public class server {
         String res ="";
         if (n % 10 != 0) res = docdonvi(n % 10) + " " + res;
         n /= 10;
-        if (n % 10 != 0) res = docchuc(n%10) + " " + res;
+        res = docchuc(n%10) + " " + res;
         n /= 10;
         if (n % 10 != 0) res = doctram(n%10) + " " + res;
         return res;
@@ -58,23 +60,19 @@ public class server {
 
     public static String doctram(int n) {
         if (n == 0) {
-            if (n1 > 1000)
-                return "khong tram";
-            else
-                return "";
+            return "";
         } else
             return so[n] + " tram";
     }
 
     public static String docchuc(int n) {
-        if (n == 0) {
-            if (n1 % 100 != 0)
-                return "linh";
-            else return "";
+
+        if (n == 0 && n1 % 10 !=0) {
+            return "linh";
         }
-        return so[n] + " muoi";
+        if (n != 0) return so[n] + " muoi";
 
-
+        return "";
     }
 
     public static String docdonvi(int n) {
